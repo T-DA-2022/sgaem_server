@@ -10,49 +10,49 @@ const saltRounds = 10;
 const SECRET_KEY = process.env.JWT_SECRET;
 
 // access token이 만료된 경우 refresh token을 검증한 후 새로운 access token 발급
-router.get(
-  "/refresh",
-  passport.authenticate("jwt", { session: false }),
-  async (req, res, next) => {
-    // refresh token 검증이 완료되면
-    try {
-      // access token 발급
-      const accessToken = jwt.sign({ id: req.user.id }, SECRET_KEY, {
-        expiresIn: "1h",
-      });
-      return res.status(201).send({ accessToken });
-    } catch (err) {
-      console.error(err);
-      next(err);
-    }
-  }
-);
+// router.get(
+//   "/refresh",
+//   passport.authenticate("jwt", { session: false }),
+//   async (req, res, next) => {
+//     // refresh token 검증이 완료되면
+//     try {
+//       // access token 발급
+//       const accessToken = jwt.sign({ id: req.user.id }, SECRET_KEY, {
+//         expiresIn: "1h",
+//       });
+//       return res.status(201).send({ accessToken });
+//     } catch (err) {
+//       console.error(err);
+//       next(err);
+//     }
+//   }
+// );
 
-router.post(
-  "/test",
-  passport.authenticate("jwt", { session: false }),
-  async (req, res, next) => {
-    //jwtDecode(req.authorization);
-    try {
-      return res.json({ ok: true });
-    } catch (error) {
-      console.log("here");
-      console.error(error);
-      next(error);
-    }
-  }
-);
+// router.post(
+//   "/test",
+//   passport.authenticate("jwt", { session: false }),
+//   async (req, res, next) => {
+//     //jwtDecode(req.authorization);
+//     try {
+//       return res.json({ ok: true });
+//     } catch (error) {
+//       console.log("here");
+//       console.error(error);
+//       next(error);
+//     }
+//   }
+// );
 
-router.get(
-  "/userSession",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    //console.log(req.session);
-    //console.log(req.session.isLoggedIn);
-    console.log(req.isAuthenticated());
-    return res.send({ isLoggedIn: req.session.isLoggedIn });
-  }
-);
+// router.get(
+//   "/userSession",
+//   passport.authenticate("jwt", { session: false }),
+//   (req, res) => {
+//     //console.log(req.session);
+//     //console.log(req.session.isLoggedIn);
+//     console.log(req.isAuthenticated());
+//     return res.send({ isLoggedIn: req.session.isLoggedIn });
+//   }
+// );
 
 router.get("/join", (req, res) => {
   res.render("join");
