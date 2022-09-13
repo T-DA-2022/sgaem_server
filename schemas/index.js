@@ -13,9 +13,7 @@ const connect = () => {
   mongoose.connect(
     uri,
     {
-      //connnect to clubism database
       useNewUrlParser: true,
-
       useUnifiedTopology: true,
     },
     (err) => {

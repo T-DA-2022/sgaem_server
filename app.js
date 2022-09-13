@@ -11,6 +11,7 @@ const passportConfig = require("./passport");
 const connectDB = require("./schemas");
 const cors = require("cors");
 const multer = require("multer");
+const bodyParser = require("body-parser");
 // middlewares
 
 const indexRouter = require("./routes");
@@ -40,6 +41,7 @@ app.use(
 app.set("port", process.env.PORT || 4000);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+/*
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   session({
@@ -55,6 +57,7 @@ app.use(
     // store: new RedisStore({ client: redisClient }),
   })
 );
+*/
 app.use(passport.initialize());
 //app.use(passport.session());
 

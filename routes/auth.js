@@ -4,6 +4,7 @@ const User = require("../schemas/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
+const url = require("url");
 // const { smtpTransport } = require("../middlewares/nodemailer");
 const saltRounds = 10;
 
@@ -61,6 +62,7 @@ router.get("/join", (req, res) => {
 router.post("/join", async (req, res) => {
   // console.log(req.body);
   // console.log("test1");
+  console.log(req.body);
   const { email, password, name, studentId, dob, gender, phone } = req.body;
   // const { username, id, password } = JSON.parse(req.body);
   // username, id, password를 가입할때 받는 것으로 가정.
@@ -105,7 +107,8 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
-router.post("/login", (req, res, next) => {
+router.post("/login", async (req, res, next) => {
+  console.log(req.body);
   passport.authenticate(
     "local",
     { session: false },
@@ -179,11 +182,13 @@ router.get("/logout", async (req, res, next) => {
   res.redirect("/");
 });
 
-router.get("/mypage", async (req, res) => {
+router.post("/mypage", async (req, res) => {
   const user_id = req.body;
+  console.log(req.body);
+  console.log(user_id);
 
   try {
-    const user = await User.findOne({ user_id });
+    const user = await User.findOne({ email: user_id.user_id });
     if (!user) {
       return res.json({
         message: "can't find user",
@@ -207,6 +212,7 @@ router.get("/mypage", async (req, res) => {
 });
 
 router.post("/fixmypage", async (req, res) => {
+  console.log(req);
   const userData = req.body;
   const userId = userData._id;
   try {
