@@ -86,6 +86,11 @@ router.post("/join", async (req, res) => {
         dob,
         gender,
         phone,
+        courseBasic: 0,
+        courseCompetition: 0,
+        courseContent: 0,
+        courseBroadcast: 0,
+        courseAdvanced: 0,
       });
       return res.json({
         message: "success",

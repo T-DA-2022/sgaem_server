@@ -11,7 +11,6 @@ const passportConfig = require("./passport");
 const connectDB = require("./schemas");
 const cors = require("cors");
 const multer = require("multer");
-const bodyParser = require("body-parser");
 // middlewares
 
 const indexRouter = require("./routes");
@@ -31,6 +30,12 @@ nunjucks.configure("public", {
 passportConfig();
 connectDB();
 
+// const redisClient = redis.createClient({
+//   //   url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+//   //   password: process.env.REDIS_PASSWORD,
+//   url: "127.0.0.1",
+//   port: 17574,
+// });
 app.use(
   cors({
     origin: true,
@@ -40,8 +45,7 @@ app.use(
 
 app.set("port", process.env.PORT || 4000);
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-/*
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   session({
@@ -57,7 +61,6 @@ app.use(
     // store: new RedisStore({ client: redisClient }),
   })
 );
-*/
 app.use(passport.initialize());
 //app.use(passport.session());
 
