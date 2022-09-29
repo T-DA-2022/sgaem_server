@@ -60,8 +60,6 @@ router.get("/join", (req, res) => {
 });
 
 router.post("/join", async (req, res) => {
-  // console.log(req.body);
-  // console.log("test1");
   console.log(req.body);
   const { email, password, name, studentId, dob, gender, phone } = req.body;
   // const { username, id, password } = JSON.parse(req.body);
