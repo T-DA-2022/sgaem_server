@@ -36,6 +36,12 @@ connectDB();
 //   url: "127.0.0.1",
 //   port: 17574,
 // });
+// app.use(
+//   cors({
+//     origin: false,
+//     credentials: false,
+//   })
+// );
 app.use(
   cors({
     origin: true,
